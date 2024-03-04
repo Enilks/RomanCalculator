@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 
 public class Readout extends JPanel {
     public static String readout = "0";
+    public static String stored;
+
+    public static char func;
+
     private static boolean romanRO = true;
 
     private static JLabel label = new JLabel(readout);
@@ -75,9 +79,39 @@ public class Readout extends JPanel {
         update();
     }
 
-    public static void clear() {
+    public static void clearAll() {
         readout = "0";
         update();
+    }
+
+    public static void nextEntry() {
+        if (stored != null) {
+            solve();
+        } else {
+            stored = readout;
+        }
+    }
+
+    private static void solve() {
+        int sto = Integer.valueOf(stored);
+        int ro = Integer.valueOf(readout);
+        int ans = 0;
+        switch (func) {
+            case '/':
+                ans = sto/ro;
+                break;
+            case 'x':
+                ans = sto*ro;
+                break;
+            case '-':
+                ans = sto - ro;
+                break;
+            case '+':
+                ans = sto + ro;
+        }
+
+        readout = Integer.toString(ans);
+        stored = null;
     }
 
     

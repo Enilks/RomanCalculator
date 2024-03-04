@@ -1,24 +1,18 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Main {
     private static JFrame cFrame;
-    private static JPanel keypad;
 
     private static Readout readout;
 
     private static String romanString = "";
 
-    public static boolean romanKeys = false;
+    public static boolean modeRoman = false;
 
     public static void main(String[] args) {
         
@@ -49,44 +43,12 @@ public class Main {
 
             readout = new Readout(); // create readout
 
-            keypad = new JPanel(new GridLayout(4, 3));
-            keypad.setBackground(Color.pink);
-            
+            Keypad keypad = new Keypad();
+            Functions funcpad = new Functions();
 
-            for (int i = 0; i < 10; i++) { // add numkeys
-                NumKey key;
-                if (i < 9) {
-                    key = new NumKey(i+1);
-                } else {
-                    // this positions 0 at the end
-                    key = new NumKey(0);
-                }
-                keypad.add(key);
-            }
-            
-            JButton del = new JButton("del");
-            del.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Readout.backspace();
-                }
-                
-            });
-            keypad.add(del);
-
-            JButton clear = new JButton("clr");
-            clear.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Readout.clear();
-                }
-                
-            });
-            keypad.add(clear);
-
+            cFrame.setPreferredSize(new Dimension(400, 550));
             cFrame.add(keypad, BorderLayout.CENTER);
+            cFrame.add(funcpad, BorderLayout.EAST);
             cFrame.add(readout, BorderLayout.NORTH);
             cFrame.pack();
             cFrame.setVisible(true);

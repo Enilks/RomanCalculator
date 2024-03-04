@@ -6,7 +6,7 @@ import javax.swing.JButton;
 public class NumKey extends JButton {    
     public NumKey (int value) {
 
-        if (Main.romanKeys) {
+        if (Main.modeRoman) {
             this.setText(Main.getRoman(Integer.toString(value))); // set key to be roman value
         } else {
             this.setText(Integer.toString(value)); // set key display
