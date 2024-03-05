@@ -1,76 +1,43 @@
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Functions extends JPanel {
+    private static FButton div;
+    private static FButton mult;
+    private static FButton sub;
+    private static FButton add;
+    private static FButton sqr;
+
+    public static boolean hasSelection = false;
 
     public Functions() {
         setLayout(new GridLayout(5, 1));
 
-        JButton div = new JButton("/");
-        div.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Readout.nextEntry();
-                Readout.func = '/';
-            }
-            
-        });
+        div = new FButton("/");
         add(div);
 
-        JButton mult = new JButton("x");
-        mult.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Readout.nextEntry();
-                Readout.func = 'x';
-            }
-            
-        });
+        mult = new FButton("x");
         add(mult);
 
-        JButton sub = new JButton("-");
-        sub.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Readout.nextEntry();
-                Readout.func = '-';
-            }
-            
-        });
+        sub = new FButton("-");
         add(sub);
 
-        JButton add = new JButton("+");
-        add.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Readout.nextEntry();
-                Readout.func = '+';
-            }
-            
-        });
+        add = new FButton("+");
         add(add);
 
-        JButton sqr = new JButton("sqr");
-        sqr.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int r = Integer.valueOf(Readout.readout);
-                Readout.readout = Integer.toString(r*r);
-            }
-            
-        });
+        sqr = new FButton("sqr");
         add(sqr);
 
     }
 
+    public static void deselectAll(){
+        hasSelection = false;
+        div.setSelected(false);
+        mult.setSelected(false);
+        sub.setSelected(false);
+        add.setSelected(false);
+        sqr.setSelected(false);
+    }
 
 }

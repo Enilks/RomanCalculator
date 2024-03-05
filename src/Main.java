@@ -9,6 +9,7 @@ public class Main {
     private static JFrame cFrame;
 
     private static Readout readout;
+    private static Keypad keypad;
 
     private static String romanString = "";
 
@@ -43,7 +44,7 @@ public class Main {
 
             readout = new Readout(); // create readout
 
-            Keypad keypad = new Keypad();
+            keypad = new Keypad();
             Functions funcpad = new Functions();
 
             cFrame.setPreferredSize(new Dimension(400, 550));
@@ -55,6 +56,8 @@ public class Main {
         }
     }
 
+    
+
     public static int getFrameHeight() {
         return cFrame.getHeight();
     }
@@ -62,9 +65,32 @@ public class Main {
         return cFrame.getWidth();
     }
 
-    private static void toNumbers(String n) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toNumbers'");
+    public static int toNumbers(String string) {
+        int value = 0;
+        int loc = 0;
+        
+        while (loc < string.length()) {
+            int cVal = getCharValue(string.charAt(loc)); // get numeral at loc and find its value
+            int nextVal;
+            try {
+                nextVal = getCharValue(string.charAt(loc+1)); // same, but for next numeral 
+            } catch (StringIndexOutOfBoundsException e) {
+                value += cVal;
+                break;
+            }
+
+            if (cVal >= nextVal) {
+                value += cVal;
+                loc++;
+            } else {
+                
+                value += nextVal - cVal;
+                loc += 2;
+            }
+            
+        }
+        
+        return value;
     }
 
     public static void toRoman(String value) {
@@ -101,7 +127,12 @@ public class Main {
         System.out.println(romanString);
     }
     public static String getRoman(String value) {
-        int n = Integer.parseInt(value);
+        int n;
+        try {
+            n = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return "";
+        }
         String rString = "";
 
         if (n >= 4000) {
@@ -133,6 +164,13 @@ public class Main {
     
     public static String getRoman(int value) {
         return getRoman(Integer.toString(value));
+    }
+
+    public static void updateKeypad() {
+        cFrame.remove(keypad);
+        keypad = new Keypad();
+        cFrame.add(keypad, BorderLayout.CENTER);
+        cFrame.revalidate();
     }
 
     private static void addLetters(String letter, int amount) {
@@ -169,6 +207,19 @@ public class Main {
             return getPlaceLetter(place);
         }
         return "?";
+    }
+    private static int getCharValue(char numeral) {
+        switch (numeral) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+
     }
 
 }

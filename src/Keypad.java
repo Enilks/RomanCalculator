@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 public class Keypad extends JPanel {
 
     public Keypad() {
-        setLayout(new GridLayout(5, 3));
+        int rows = 5;
+        if (Main.modeRoman) rows = 4;
+
+        setLayout(new GridLayout(rows, 3));
         setBackground(Color.pink);
 
         JButton allclear = new JButton("Clear All"); // AC button
@@ -29,8 +32,7 @@ public class Keypad extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                Readout.clear();
             }
             
         });
@@ -42,37 +44,50 @@ public class Keypad extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Readout.backspace();
-                System.out.println("H: " + Main.getFrameHeight() + "  W: " + Main.getFrameWidth());
             }
             
         });
         add(del);
 
+        if (Main.modeRoman) {
+            for (int i = 1; i < 7; i++) // add romKeys
+                add(new RomKey(i));
+        } else {
         for (int i = 0; i < 9; i++) // add numkeys
             add(new NumKey(i+1));
-            
-        JButton switchModes = new JButton("Roman off"); // switch modes button
-        if (Main.modeRoman) switchModes.setText("Roman on");
+        }
+
+        JButton switchModes = new JButton("Roman Mode"); // switch modes button
+        if (Main.modeRoman) switchModes.setText("Normal Mode");
         switchModes.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                if (Main.modeRoman) {
+                    Main.modeRoman = false;
+                    Readout.toggleRO(false);
+                } else {
+                    Main.modeRoman = true;
+                    Readout.toggleRO(true);
+                }
+                Main.updateKeypad();
             }
             
         });
         add(switchModes);
 
-        add(new NumKey(0)); // add 0 key
+        if (Main.modeRoman) {
+            add(new RomKey(7));
+        } else {
+            add(new NumKey(0)); // add 0 key
+        }
 
         JButton eqls = new JButton("="); // equals button
         eqls.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                Readout.solve();
             }
             
         });
