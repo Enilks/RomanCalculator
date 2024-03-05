@@ -2,6 +2,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,6 +92,7 @@ public class Keypad extends JPanel {
             }
             
         });
+        eqls.setFont(new Font("Calibri", Font.PLAIN, 24));
         add(eqls);
 
     }

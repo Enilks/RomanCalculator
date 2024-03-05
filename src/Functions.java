@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ public class Functions extends JPanel {
 
     public Functions() {
         setLayout(new GridLayout(5, 1));
+        setBackground(Color.PINK);
 
         div = new FButton("/");
         add(div);

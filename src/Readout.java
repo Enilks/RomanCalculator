@@ -73,7 +73,7 @@ public class Readout extends JPanel {
         if (Main.modeRoman) {
             String s = Main.getRoman(readout) + Main.getRoman(num);
             label.setText(s);
-            readout = Integer.toString(Main.toNumbers(s));
+            readout = Integer.toString(Main.getNumbers(s));
         } else {
             readout += Integer.toString(num);
         }
@@ -95,7 +95,13 @@ public class Readout extends JPanel {
 
     public static void backspace() {
         if (readout.equals(0)) return;
-        readout = readout.substring(0, (readout.length()-1));
+        if (romanRO) {
+            String s = Main.getRoman(readout);
+            s = s.substring(0, s.length()-1);
+            readout = Main.getNumbersString(s);
+        } else {
+            readout = readout.substring(0, (readout.length()-1));
+        }
         update();
     }
 

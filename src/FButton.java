@@ -3,15 +3,17 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class FButton extends JButton {
-    private final Font font = new Font("Calibri", Font.PLAIN, 26);
+    private final Font font = new Font("Calibri", Font.PLAIN, 24);
     private boolean selected = false;
 
     public FButton(String function) {
         setText(function);
         setFont(font);
+        //setBorder(BorderFactory.createLineBorder(Color.BLACK, 5, true));
         setBorderPainted(false);
         setOpaque(true);
         setFocusPainted(false);
@@ -39,9 +41,11 @@ public class FButton extends JButton {
         if (bool) {
             setForeground(Color.WHITE);
             setBackground(Color.BLACK);
+            //setBorder(BorderFactory.createLineBorder(Color.WHITE));
         } else {
             setForeground(Color.BLACK);
             setBackground(Color.WHITE);
+            //setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
         revalidate();
     }

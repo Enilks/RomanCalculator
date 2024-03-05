@@ -32,7 +32,7 @@ public class Main {
 
             if (roman) {
                 System.out.println("Converting Roman Numerals \"" + n + "\" to Base 10.");
-                toNumbers(n);
+                getNumbers(n);
             } else {
                 System.out.println("Converting Base 10 \"" + n + "\" to Roman Numerals.");
                 toRoman(n);
@@ -65,7 +65,7 @@ public class Main {
         return cFrame.getWidth();
     }
 
-    public static int toNumbers(String string) {
+    public static int getNumbers(String string) {
         int value = 0;
         int loc = 0;
         
@@ -92,8 +92,11 @@ public class Main {
         
         return value;
     }
+    public static String getNumbersString(String string) {
+        return Integer.toString(getNumbers(string));
+    }
 
-    public static void toRoman(String value) {
+    private static void toRoman(String value) {
         int n = Integer.parseInt(value);
         romanString = "";
 
