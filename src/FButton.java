@@ -14,7 +14,9 @@ public class FButton extends JButton {
         setText(function);
         setFont(font);
         //setBorder(BorderFactory.createLineBorder(Color.BLACK, 5, true));
-        setBorderPainted(false);
+        //setBorderPainted(false);
+        setBackground(Color.WHITE);
+        setForeground(Color.BLACK);
         setOpaque(true);
         setFocusPainted(false);
 
