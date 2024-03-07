@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Functions extends JPanel {
@@ -8,13 +11,13 @@ public class Functions extends JPanel {
     private static FButton mult;
     private static FButton sub;
     private static FButton add;
-    private static FButton sqr;
+    private static JButton sqr;
 
     public static boolean hasSelection = false;
 
     public Functions() {
         setLayout(new GridLayout(5, 1));
-        setBackground(Color.PINK);
+        setBackground(Color.white);
 
         div = new FButton("/");
         add(div);
@@ -28,7 +31,16 @@ public class Functions extends JPanel {
         add = new FButton("+");
         add(add);
 
-        sqr = new FButton("sqr");
+        sqr = new JButton("sqr");
+        sqr.setBackground(Color.white);
+        sqr.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Readout.square();
+            }
+            
+        });
         add(sqr);
 
     }

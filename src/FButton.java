@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class FButton extends JButton {
@@ -13,8 +12,6 @@ public class FButton extends JButton {
     public FButton(String function) {
         setText(function);
         setFont(font);
-        //setBorder(BorderFactory.createLineBorder(Color.BLACK, 5, true));
-        //setBorderPainted(false);
         setBackground(Color.WHITE);
         setForeground(Color.BLACK);
         setOpaque(true);
@@ -28,9 +25,13 @@ public class FButton extends JButton {
                 if (selected) {
                     Functions.deselectAll();
                 } else {
-                    if (Functions.hasSelection) Functions.deselectAll();
+                    if (Functions.hasSelection) {
+                        Functions.deselectAll();
+                    } else {
+                        Readout.nextEntry();
+                    }
                     setSelected(true);
-                    Readout.nextEntry();
+                    Functions.hasSelection = true;
                     Readout.func = function.charAt(0);
                 }
             }
@@ -43,11 +44,9 @@ public class FButton extends JButton {
         if (bool) {
             setForeground(Color.WHITE);
             setBackground(Color.BLACK);
-            //setBorder(BorderFactory.createLineBorder(Color.WHITE));
         } else {
             setForeground(Color.BLACK);
             setBackground(Color.WHITE);
-            //setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
         revalidate();
     }

@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.text.DecimalFormat;
+
 public class Readout extends JPanel {
     public static String readout = "0";
     public static String stored;
@@ -19,10 +21,10 @@ public class Readout extends JPanel {
 
     private static JLabel label = new JLabel(readout);
 
-    private final Font font = new Font("Calibri", Font.PLAIN, 42);
-    private final Font bold = new Font("Calibri", Font.BOLD, 42);
-    private final Font roman = new Font("Times New Roman", Font.PLAIN, 42);
-    private final Font romanBold = new Font ("Times New Roman", Font.BOLD, 42);
+    private final static Font font = new Font("Calibri", Font.PLAIN, 42);
+    private static final Font roman = new Font("Times New Roman", Font.PLAIN, 42);
+
+    private final static DecimalFormat fmt = new DecimalFormat("#,###");
 
     public Readout() {
         this.setBackground(new Color(0, 21, 110));
@@ -42,15 +44,13 @@ public class Readout extends JPanel {
             // Idea - For the following two methods, add a timer so that after the mouse has hovered over for a lil bit, the format switches until the mouse hovers off.
             @Override
             public void mouseEntered(MouseEvent e) {
-                label.setFont(bold);
-                if (romanRO) label.setFont(romanBold);
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 label.setFont(font);
-                if (romanRO) label.setFont(romanBold);
+                if (romanRO) label.setFont(roman);
             }
             
         });
@@ -67,7 +67,7 @@ public class Readout extends JPanel {
     }
 
     public static void type(int num) {
-        if (readout.equals("0") || needsNextEntry) readout = "";
+        if (readout.equals("0") || needsNextEntry || readout.equals(Main.error)) readout = "";
         needsNextEntry = false;
         Functions.deselectAll();
         if (Main.modeRoman) {
@@ -77,7 +77,6 @@ public class Readout extends JPanel {
         } else {
             readout += Integer.toString(num);
         }
-        // System.out.println("Readout Value: " + readout + "   Roman: " + Main.getRoman(readout));
         update();
     }
 
@@ -88,8 +87,11 @@ public class Readout extends JPanel {
             } else {
                 label.setText(Main.getRoman(readout));
             }
+            label.setFont(roman);
         } else {
-            label.setText(readout);
+            String out = fmt.format(Double.valueOf(readout));
+            label.setText(out);
+            label.setFont(font);
         }
     }
 
@@ -155,5 +157,9 @@ public class Readout extends JPanel {
         update();
     }
 
-    
+    public static void square() {
+        int ro = Integer.valueOf(readout);
+        readout = Integer.toString(ro*ro);
+        update();
+    }
 }

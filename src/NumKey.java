@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,7 @@ public class NumKey extends JButton {
     public NumKey (int value) {
         this.setText(Integer.toString(value)); // set key display
         this.setFont(new Font("Calibri", Font.PLAIN, 18));
+        this.setBackground(Color.white);
 
         this.addActionListener(new ActionListener() {
             @Override

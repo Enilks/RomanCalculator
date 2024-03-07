@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ public class RomKey extends JButton {
         }
         setText(Main.getRoman(value));
         setFont(new Font("Times New Roman", Font.PLAIN, 18));
+        setBackground(Color.white);
 
         this.addActionListener(new ActionListener() {
             @Override

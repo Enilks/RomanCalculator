@@ -12,6 +12,7 @@ public class Main {
     private static Keypad keypad;
 
     private static String romanString = "";
+    public static final String error = "error :(";
 
     public static boolean modeRoman = false;
 
@@ -102,6 +103,7 @@ public class Main {
 
         if (n >= 4000) {
             System.out.println("Cannot convert to roman numerals (Too Large)");
+            romanString = error;
             return;
         }
 
@@ -109,7 +111,6 @@ public class Main {
         for (int place = value.length(); place > 0; place--) {
             int loc = value.length() - place; // find place location in string
             int val = Integer.parseInt(value.substring(loc, loc+1)); // get place value
-            // System.out.println("Place: " + place + "   Value: " + val);
             String l = getPlaceLetter(place);
             String l2 = getPlaceLetter(place, true);
 
@@ -134,16 +135,20 @@ public class Main {
         try {
             n = Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            return "";
+            return error;
+        }
+        if (n < 0) {
+            System.out.println("Error: Negative Number");
+            return error;
         }
         String rString = "";
 
         if (n >= 4000) {
-            System.out.println("Cannot convert to roman numerals (Too Large)");
-            return null;
+            System.out.println("Error: Cannot convert to roman numerals (Too Large)");
+            return error;
         }
 
-        for (int place = value.length(); place > 0; place--) {
+        for (int place  = value.length(); place > 0; place--) {
             int loc = value.length() - place; // find place location in string
             int val = Integer.parseInt(value.substring(loc, loc+1)); // get place value
             String l = getPlaceLetter(place);

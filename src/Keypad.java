@@ -15,7 +15,7 @@ public class Keypad extends JPanel {
         if (Main.modeRoman) rows = 4;
 
         setLayout(new GridLayout(rows, 3));
-        setBackground(Color.pink);
+        setBackground(Color.gray);
 
         JButton allclear = new JButton("Clear All"); // AC button
         allclear.addActionListener(new ActionListener() {
@@ -26,6 +26,7 @@ public class Keypad extends JPanel {
             }
             
         });
+        allclear.setBackground(Color.white);
         add(allclear);
 
         JButton clear = new JButton("Clear Entry"); // C button
@@ -37,6 +38,7 @@ public class Keypad extends JPanel {
             }
             
         });
+        clear.setBackground(Color.white);
         add(clear);
 
         JButton del = new JButton("Backspace");
@@ -48,6 +50,7 @@ public class Keypad extends JPanel {
             }
             
         });
+        del.setBackground(Color.white);
         add(del);
 
         if (Main.modeRoman) {
@@ -58,8 +61,8 @@ public class Keypad extends JPanel {
             add(new NumKey(i+1));
         }
 
-        JButton switchModes = new JButton("Roman Mode"); // switch modes button
-        if (Main.modeRoman) switchModes.setText("Normal Mode");
+        JButton switchModes = new JButton("<html><p>Roman Mode</p></html>"); // switch modes button
+        if (Main.modeRoman) switchModes.setText("<html><p>Normal Mode</p></html>");
         switchModes.addActionListener(new ActionListener() {
 
             @Override
@@ -75,6 +78,7 @@ public class Keypad extends JPanel {
             }
             
         });
+        switchModes.setBackground(Color.white);
         add(switchModes);
 
         if (Main.modeRoman) {
@@ -93,6 +97,7 @@ public class Keypad extends JPanel {
             
         });
         eqls.setFont(new Font("Calibri", Font.PLAIN, 24));
+        eqls.setBackground(Color.white);
         add(eqls);
 
     }
